@@ -6,9 +6,7 @@ class TopicsController < ApplicationController
   # THIS IS WHERE TO SORT:
   def index
     @vote_count_hash = Vote.group(:topic_id).count    # => { 'id_abc' => 5, 'id_xyz' => 3 }
-    #Vote.all.sort_by { |vote| vote.group(:topic_id).count }
-    Topic.all.sort_by { |topic| @vote_count_hash[topic.id]}
-    @topics = Topic.all
+    @topics = Topic.all.sort_by { |topic| @vote_count_hash[topic.id]}
   end
 
   # GET /topics/1
@@ -20,6 +18,10 @@ class TopicsController < ApplicationController
   # GET /topics/new
   def new
     @topic = Topic.new
+  end
+
+  # GET /topics/about
+  def about
   end
 
   # GET /topics/1/edit
